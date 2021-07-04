@@ -86,6 +86,10 @@ module Ferrum
       raise NotImplementedError
     end
 
+    def school_into_view
+      tap { page.command("DOM.scrollIntoViewIfNeeded", nodeId: node_id) }
+    end
+
     def select_file(value)
       page.command("DOM.setFileInputFiles", slowmoable: true, nodeId: node_id, files: Array(value))
     end

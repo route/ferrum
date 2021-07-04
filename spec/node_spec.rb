@@ -106,20 +106,19 @@ module Ferrum
       end
     end
 
-    context "when the element is not in the viewport of parent element", skip: true do
+    context "when the element is not in the viewport of parent element" do
       before do
         browser.go_to("/ferrum/scroll")
       end
 
       it "scrolls into view" do
-        # FIXME:
-        browser.at_xpath("//a[text() = 'Link outside viewport']").click
-        expect(browser.current_url).to eq("/")
+        browser.at_xpath("//a[text() = 'Link outside viewport']").school_into_view.click
+        expect(browser.current_url).to eq(base_url("/"))
       end
 
       it "scrolls into view if scrollIntoViewIfNeeded fails" do
-        browser.click_link "Below the fold"
-        expect(browser.current_path).to eq("/")
+        browser.at_xpath("//a[*//text() = 'Below the fold']").school_into_view.click
+        expect(browser.current_url).to eq(base_url("/"))
       end
     end
 
